@@ -41,6 +41,8 @@ android {
 dependencies {
     implementation("com.google.android.material:material:1.9.0-alpha02")
     implementation("com.android.volley:volley:1.2.1")
+    implementation("com.google.code.gson:gson:2.10.1")
+
 //
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
