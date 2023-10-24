@@ -3,11 +3,14 @@ package com.example.eventpulse.Activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventpulse.Adapter.LatestEventsAdapter
 import com.example.eventpulse.Adapter.RecomendendEventsAdapter
+import com.example.eventpulse.Adapter.TrendingEventsAdapter
+import com.example.eventpulse.Adapter.UpComingEventsAdapter
 import com.example.eventpulse.Data.homeData.DashData
 import com.example.eventpulse.Data.login.UserLogin
 import com.example.eventpulse.R
@@ -46,6 +49,8 @@ class Home : AppCompatActivity() {
                 setContentView(bind.root)
                 this.renderLatestEvents(resData)
                 this.renderRecommenenData(resData)
+                this.renderUpcoming(resData)
+                this.renderTrending(resData)
             }else{
                 setContentView(R.layout.activity_login)
                 Toast.makeText(this,"An Error Occurred", Toast.LENGTH_SHORT).show()
@@ -64,6 +69,24 @@ class Home : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = adapter
 
+    }
+    private fun renderUpcoming(resData: DashData){
+        if (resData.upCommingEvents.isEmpty()){
+            bind.invisibleHolder.visibility = View.VISIBLE
+        }else{
+            val adapter = UpComingEventsAdapter(this, resData.upCommingEvents)
+            val recyclerView = findViewById<RecyclerView>(R.id.upcoming_events_recycler)
+            recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView.adapter = adapter
+        }
+
+    }
+
+    private fun renderTrending(resData: DashData){
+        val adapter = TrendingEventsAdapter(this, resData.trendingEvents)
+        val recyclerView = findViewById<RecyclerView>(R.id.trending_events_recycler)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerView.adapter = adapter
         Log.d("Adapter", "Item count: ${adapter.itemCount}")
     }
 

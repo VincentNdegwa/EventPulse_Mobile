@@ -5,5 +5,6 @@ data class DashData(
     val error: Boolean,
     val latestEvents: List<LatestEvent>,
     val recomendedEvents: List<RecomendedEvent>,
-    val upCommingEvents: List<Any>
+    val upCommingEvents: List<upCommingEvents>,
+    val trendingEvents: List<trendingEvents>
 )
