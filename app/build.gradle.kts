@@ -42,6 +42,7 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0-alpha02")
     implementation("com.android.volley:volley:1.2.1")
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation ("com.github.bumptech.glide:glide:4.14.2")
 
 //
     implementation("androidx.core:core-ktx:1.9.0")

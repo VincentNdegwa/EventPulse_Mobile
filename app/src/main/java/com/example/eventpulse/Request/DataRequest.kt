@@ -14,7 +14,7 @@ class DataRequest(context: Context) {
         try {
             val queue = Volley.newRequestQueue(context)
 
-            var stringreq =object :StringRequest(Request.Method.POST, Variables().Url+url, {
+            var stringreq =object :StringRequest(Request.Method.POST, Variables().Url+"/"+url, {
                     res->
                 onSuccess(res)
             }, {
