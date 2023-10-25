@@ -8,10 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.eventpulse.Data.homeData.DashData
 import com.example.eventpulse.Data.homeData.LatestEvent
+import com.example.eventpulse.Modules.Redirect
 import com.example.eventpulse.R
-import com.example.eventpulse.variables.Variables
+import com.example.eventpulse.Modules.Variables
+import com.google.gson.Gson
 
 class LatestEventsAdapter(private var data:List<LatestEvent>,private var context: Context): RecyclerView.Adapter<LatestEventsAdapter.ViewHolder>() {
     class  ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
@@ -28,8 +29,14 @@ class LatestEventsAdapter(private var data:List<LatestEvent>,private var context
         holder.event_title.text = data[position].title
         holder.event_description.text = data[position].description
         Glide.with(context).load(Variables().Url+data[position].event_image).into(holder.event_image)
+
+        holder.itemView.setOnClickListener{
+            var dataString = Gson().toJson(data[position])
+            Redirect(context).openEventView(dataString)
+        }
     }
     override fun getItemCount(): Int {
         return this.data.size
     }
+
 }

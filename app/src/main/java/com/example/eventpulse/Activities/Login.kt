@@ -23,7 +23,6 @@ class Login : AppCompatActivity() {
         var sharedPref = getSharedPreferences("user", Context.MODE_PRIVATE).getString("credentials", null)
         println(sharedPref)
         if (sharedPref !== null){
-            setContentView(R.layout.main_loading)
             var dataType = object : TypeToken<HashMap<String,String>>(){}.type
             var dataHashMap = gson.fromJson<HashMap<String,String>>(sharedPref, dataType)
             println(dataHashMap)

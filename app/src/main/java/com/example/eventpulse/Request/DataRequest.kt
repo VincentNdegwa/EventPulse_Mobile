@@ -4,7 +4,7 @@ import android.content.Context
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.eventpulse.variables.Variables
+import com.example.eventpulse.Modules.Variables
 
 class DataRequest(context: Context) {
     private var context = context

@@ -35,6 +35,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/user_profile_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -46,6 +47,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
+        android:id="@+id/search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25sp"
@@ -55,6 +57,7 @@
         android:background="@drawable/input_bg"
         android:padding="20sp"
         android:inputType="text"
+        android:imeOptions="actionSearch"
         android:textColorHint="@color/white" />
 
 </LinearLayout>
