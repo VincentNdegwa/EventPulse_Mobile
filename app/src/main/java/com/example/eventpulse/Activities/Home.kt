@@ -8,6 +8,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -39,13 +41,20 @@ class Home : AppCompatActivity() {
         if (loading == true && !data.isNullOrEmpty()){
             userData =  gson.fromJson(data, UserLogin::class.java)
             this.renderData()
+            this.eventListeners()
         }else{
             setContentView(R.layout.activity_login)
             Toast.makeText(this,"An Error Occurred", Toast.LENGTH_SHORT).show()
         }
 
     }
-
+    private fun eventListeners(){
+        var menuButton = bind.topFragment.findViewById<ImageView>(R.id.hamburger_button)
+        menuButton.setOnClickListener{
+            var drawer = findViewById<DrawerLayout>(R.id.home_nav_drawer)
+            drawer.openDrawer(GravityCompat.START)
+        }
+    }
     private fun renderData(){
         var userData = gson.fromJson(data, UserLogin::class.java)
         Toast.makeText(this, "You are logged in as ${userData.data.email}", Toast.LENGTH_SHORT).show()

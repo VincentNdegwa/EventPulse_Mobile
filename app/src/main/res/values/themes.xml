@@ -5,5 +5,12 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="Widget.App.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <item name="android:background">@color/green</item>
+        <item name="itemTextColor">@color/orange</item>
+        <item name="android:textSize">50sp</item>
+        <item name="height">50sp</item>
+    </style>
+
     <style name="Theme.EventPulse" parent="Base.Theme.EventPulse" />
 </resources>

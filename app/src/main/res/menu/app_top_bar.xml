@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
- <group/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+ <group android:checkableBehavior="single">
+  <item
+      android:title="Home"
+      android:icon="@drawable/baseline_home_24"
+      android:id="@+id/home_nav" />
+  <item
+      android:title="Events"
+      android:icon="@drawable/baseline_event_24"
+      android:id="@+id/events_nav" />
+  <item
+      android:title="Tickets"
+      android:icon="@drawable/baseline_ticket_24"
+      android:id="@+id/tickets_nav" />
+  <item
+      android:title="Profile"
+      android:icon="@drawable/baseline_account_circle_24"
+      android:id="@+id/profile_nav" />
+ </group>
+ <group
+     android:id="@+id/group2"
+     android:checkableBehavior="single">
+  <item
+      android:id="@+id/other_item"
+      android:title="Others"
+      >
+   <menu>
+    <item android:id="@+id/logout_nav"
+     android:title="Logout"
+     android:iconTint="@color/green"
+     android:icon="@drawable/baseline_logout_24"/>
+   </menu>
+  </item>
+ </group>
 </menu>
