@@ -56,11 +56,15 @@ class Login : AppCompatActivity() {
                if ( userData.error){
                    Toast.makeText(this,userData.message, Toast.LENGTH_LONG).show()
                }else{
+                   params["profile_image"] = userData.data.profile.profile_image
+                   params["first_name"] = userData.data.profile.first_name
+
                    var dashIntent = Intent(this, Home::class.java)
                    getSharedPreferences("user", Context.MODE_PRIVATE)
-                       .edit().putString("credentials", gson.toJson(params))
+                       .edit()
+                       .putString("credentials", gson.toJson(params))
+                       .putString("userData",data)
                        .apply()
-                   dashIntent.putExtra("userData", data)
                    startActivity(dashIntent)
                }
                         },

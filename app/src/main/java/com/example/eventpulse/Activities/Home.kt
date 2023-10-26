@@ -1,5 +1,6 @@
 package com.example.eventpulse.Activities
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -37,7 +38,7 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind = ActivityHomeBinding.inflate(layoutInflater)
         loading = true
-        data = intent.getStringExtra("userData").toString()
+        data =  getSharedPreferences("user", Context.MODE_PRIVATE).getString("userData",null).toString()
         if (loading == true && !data.isNullOrEmpty()){
             userData =  gson.fromJson(data, UserLogin::class.java)
             this.renderData()
@@ -47,6 +48,11 @@ class Home : AppCompatActivity() {
             Toast.makeText(this,"An Error Occurred", Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        getSharedPreferences("user",Context.MODE_PRIVATE).edit().remove("userData").apply()
     }
     private fun eventListeners(){
         var menuButton = bind.topFragment.findViewById<ImageView>(R.id.hamburger_button)
@@ -65,11 +71,13 @@ class Home : AppCompatActivity() {
             var resData = gson.fromJson(data, DashData::class.java)
             if (!resData.error){
                 setContentView(bind.root)
+                var userProfile =   bind.topFragment.findViewById<ImageView>(R.id.user_profile_image)
                 if (!userData.data.profile.profile_image.isNullOrEmpty()){
-                    var userProfile =   bind.topFragment.findViewById<ImageView>(R.id.user_profile_image)
                     Glide.with(this)
                         .load(Variables().Url+userData.data.profile.profile_image)
                         .into(userProfile)
+                }else{
+                    Glide.with(this).load(Variables().ImageUrl).into(userProfile)
                 }
                 this.renderLatestEvents(resData)
                 this.renderRecommenenData(resData)
@@ -122,7 +130,6 @@ class Home : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.trending_events_recycler)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
-        Log.d("Adapter", "Item count: ${adapter.itemCount}")
     }
 
     private fun searchEvents(searchInput: EditText) {

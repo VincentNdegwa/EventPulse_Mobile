@@ -83,9 +83,9 @@
 
         </androidx.cardview.widget.CardView>
 
-        <include layout="@layout/drawable_nav"
+        <include
             android:id="@+id/drawer_holder"
-            />
+            layout="@layout/drawable_nav" />
     </LinearLayout>
 
 

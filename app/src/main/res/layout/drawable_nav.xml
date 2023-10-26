@@ -5,5 +5,6 @@
     android:background="@color/blue"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="20dp"
+    android:id="@+id/nav_view"
     style="@style/Widget.App.NavigationView"
     app:menu="@menu/app_top_bar"/>
