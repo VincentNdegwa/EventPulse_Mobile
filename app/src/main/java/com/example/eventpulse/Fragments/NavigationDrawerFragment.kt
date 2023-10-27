@@ -13,6 +13,7 @@ import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
 import com.example.eventpulse.Activities.Home
+import com.example.eventpulse.Activities.Tickets
 import com.example.eventpulse.Data.ProfileData.ProfileData
 import com.example.eventpulse.Modules.ActivityRender
 import com.example.eventpulse.Modules.Variables
@@ -80,7 +81,7 @@ class NavigationDrawerFragment : Fragment() {
                         true
                     }
                     R.id.tickets_nav -> {
-                        println("Tickets menu item clicked")
+                        ActivityRender(requireContext(), Tickets::class.java)
                         true
                     }
                     R.id.profile_nav -> {
