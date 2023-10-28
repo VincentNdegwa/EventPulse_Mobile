@@ -81,7 +81,7 @@ class NavigationDrawerFragment : Fragment() {
                         true
                     }
                     R.id.tickets_nav -> {
-                        ActivityRender(requireContext(), Tickets::class.java)
+                        ActivityRender(requireContext(), Tickets::class.java).open()
                         true
                     }
                     R.id.profile_nav -> {

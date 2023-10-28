@@ -70,6 +70,16 @@
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/info_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:visibility="visible"
+                android:gravity="center"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
