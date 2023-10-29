@@ -14,8 +14,10 @@ import com.example.eventpulse.Request.DataRequest
 import com.example.eventpulse.databinding.ActivityTicketsBinding
 import com.google.gson.Gson
 import android.view.View
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 
-class Tickets : AppCompatActivity() {
+class TicketsAct : AppCompatActivity() {
     private lateinit var bind:ActivityTicketsBinding
     private lateinit var message: String
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,12 +51,20 @@ class Tickets : AppCompatActivity() {
                 this.renderMessage()
             })
         }
+        this.eventListeners()
 
+    }
+
+    private fun eventListeners() {
+        bind.hamburgerButton.setOnClickListener{
+            var drawer = findViewById<DrawerLayout>(R.id.home_nav_drawer)
+            drawer.openDrawer(GravityCompat.START)
+        }
     }
 
     private fun renderMessage() {
         bind.infoText.text = message
-//        bind.infoText.visibility = android.view.View.VISIBLE
+        bind.infoText.visibility = View.VISIBLE
     }
 
     private fun renderData(data: List<TicketsData>) {
@@ -64,7 +74,8 @@ class Tickets : AppCompatActivity() {
             recyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             recyclerview.adapter = adapter
         }else{
-//            bind.infoText.visibly= View.VISISBLE
+            bind.infoText.text = message
+            bind.infoText.visibility = View.VISIBLE
         }
     }
 }

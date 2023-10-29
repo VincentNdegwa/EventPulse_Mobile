@@ -2,18 +2,15 @@ package com.example.eventpulse.Fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.example.eventpulse.Activities.Home
-import com.example.eventpulse.Activities.Tickets
 import com.example.eventpulse.Data.ProfileData.ProfileData
 import com.example.eventpulse.Modules.ActivityRender
 import com.example.eventpulse.Modules.Variables
@@ -22,20 +19,13 @@ import com.example.eventpulse.databinding.FragmentNavigationDrawerBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [NavigationDrawerFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class NavigationDrawerFragment : Fragment() {
 
     private lateinit var bind: FragmentNavigationDrawerBinding
     private lateinit var profileData: ProfileData
+    private  lateinit var sideNav: NavigationView;
+//    private lateinit var drawer: DrawerLayout
+    private lateinit var fr:FragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,48 +37,48 @@ class NavigationDrawerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         bind = FragmentNavigationDrawerBinding.inflate(layoutInflater)
-        // Inflate the layout for this fragment
         var sharedPref = requireActivity().getSharedPreferences("user",Context.MODE_PRIVATE).getString("credentials", null)
         if (!sharedPref.isNullOrEmpty()){
             profileData =  Gson().fromJson(sharedPref, ProfileData::class.java)
         }
 
         this.renderData()
-        var sideNav = bind.drawerHolder.navView
+        sideNav = bind.drawerHolder.navView
         this.addEventListeners(sideNav)
-
+        fr =  requireActivity().supportFragmentManager
         return bind.root
-
-
     }
+
     private fun addEventListeners(sideNav: NavigationView) {
+        println("menu clicked")
         for (i in 0 until sideNav.menu.size()) {
             val menuItem = sideNav.menu.getItem(i)
             menuItem.setOnMenuItemClickListener {
+                var  drawer = requireActivity().findViewById<DrawerLayout>(R.id.home_nav_drawer)
+                drawer.closeDrawer(GravityCompat.START)
                 when (menuItem.itemId) {
                     R.id.home_nav -> {
                         ActivityRender(requireContext(),Home::class.java).open()
                         true
                     }
                     R.id.events_nav -> {
-//                        ActivityRender(requireContext(),Home::class.java).open()
-                        var drawer = requireActivity().findViewById<DrawerLayout>(R.id.home_nav_drawer)
-                        drawer.closeDrawer(GravityCompat.START)
-
-                        var trans = requireActivity().supportFragmentManager.beginTransaction()
+                        var trans = fr.beginTransaction()
                         trans.replace(R.id.home_frame, Events())
                         trans.commit()
                         true
                     }
                     R.id.tickets_nav -> {
-                        ActivityRender(requireContext(), Tickets::class.java).open()
+                        var trans = fr.beginTransaction()
+                        trans.replace(R.id.home_frame,Tickets())
+                        trans.commit()
                         true
                     }
                     R.id.profile_nav -> {
-                        println("Profile menu item clicked")
                         true
                     }
-                    else -> false
+                    else -> {
+                        false
+                    }
                 }
             }
 

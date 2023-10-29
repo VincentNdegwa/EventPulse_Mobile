@@ -24,12 +24,15 @@
                 android:background="@color/blue"
                 android:layout_height="wrap_content">
                 <include layout="@layout/app_top"/>
+
             </FrameLayout>
             <ScrollView
                 android:layout_width="match_parent"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:layout_height="wrap_content">
+
+
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -40,6 +43,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/search_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25sp"
+                            android:drawableEnd="@drawable/search_icon"
+                            android:drawablePadding="14sp"
+                            android:hint="Search"
+                            android:background="@drawable/input_bg"
+                            android:padding="20sp"
+                            android:inputType="text"
+                            android:imeOptions="actionSearch"
+                            android:textColorHint="@color/white" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

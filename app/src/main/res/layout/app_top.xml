@@ -47,18 +47,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/search_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25sp"
-        android:drawableEnd="@drawable/search_icon"
-        android:drawablePadding="14sp"
-        android:hint="Search"
-        android:background="@drawable/input_bg"
-        android:padding="20sp"
-        android:inputType="text"
-        android:imeOptions="actionSearch"
-        android:textColorHint="@color/white" />
 
 </LinearLayout>
