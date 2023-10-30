@@ -41,6 +41,11 @@ class Login : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        finishAffinity()
+    }
+
     private fun navigateToDash(email: String, pass:String){
         var params = HashMap<String, String>()
 

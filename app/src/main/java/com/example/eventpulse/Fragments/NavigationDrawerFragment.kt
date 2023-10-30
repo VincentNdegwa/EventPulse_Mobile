@@ -74,6 +74,9 @@ class NavigationDrawerFragment : Fragment() {
                         true
                     }
                     R.id.profile_nav -> {
+                        var trans = fr.beginTransaction()
+                        trans.replace(R.id.home_frame,Profile())
+                        trans.commit()
                         true
                     }
                     else -> {

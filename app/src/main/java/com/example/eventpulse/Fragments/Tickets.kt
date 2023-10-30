@@ -2,6 +2,7 @@ package com.example.eventpulse.Fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,8 +36,8 @@ class Tickets : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         bind = FragmentTicketsBinding.inflate(layoutInflater)
-        return bind.root
         this.requestData()
+        return bind.root
 
     }
 
