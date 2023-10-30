@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Email
+import android.util.Log
 import android.widget.Toast
 import com.example.eventpulse.Data.login.UserLogin
 import com.example.eventpulse.R
@@ -20,9 +21,8 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        bind = ActivityLoginBinding.inflate(layoutInflater)
-        var sharedPref = getSharedPreferences("user", Context.MODE_PRIVATE).getString("credentials", null)
-        println(sharedPref)
-        if (sharedPref !== null){
+        var sharedPref = getSharedPreferences("user", Context.MODE_PRIVATE).getString("credentials", "no data")
+        if (sharedPref != "no data"){
             var dataType = object : TypeToken<HashMap<String,String>>(){}.type
             var dataHashMap = gson.fromJson<HashMap<String,String>>(sharedPref, dataType)
             println(dataHashMap)
@@ -31,9 +31,12 @@ class Login : AppCompatActivity() {
             }
         }else{
             setContentView(bind.root)
-            var email = bind.emailInput.text.toString().trim()
-            var pass = bind.passwordInput.text.toString().trim()
-            bind.loginButton.setOnClickListener { this.navigateToDash(email,pass) }
+            bind.loginButton.setOnClickListener {
+                var email = bind.emailInput.text.toString().trim()
+                var pass = bind.passwordInput.text.toString().trim()
+
+                this.navigateToDash(email,pass)
+            }
             bind.createAcc.setOnClickListener {
                 this.navigateCreateAcc()
             }
@@ -41,10 +44,10 @@ class Login : AppCompatActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        finishAffinity()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        finishAffinity()
+//    }
 
     private fun navigateToDash(email: String, pass:String){
         var params = HashMap<String, String>()
@@ -52,6 +55,7 @@ class Login : AppCompatActivity() {
         params["email"] = email
         params["password"] = pass
 
+        Log.d("navDash", params.toString())
         DataRequest(this).
         post(
             params,

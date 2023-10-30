@@ -24,7 +24,6 @@ import com.google.gson.Gson
 class Tickets : Fragment() {
 
     private lateinit var bind: FragmentTicketsBinding
-    private lateinit var message: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,14 +54,12 @@ class Tickets : Fragment() {
                     if (!dataRes.error){
                         this.renderData(dataRes.data)
                     }else{
-                        message = dataRes.message
-                        this.renderMessage()
+                        this.renderMessage(dataRes.message)
                     }
                 }
             }, onError = {
                     error->
-                message = error
-                this.renderMessage()
+                this.renderMessage(error.toString())
             })
         }
         this.eventListeners()
@@ -76,7 +73,7 @@ class Tickets : Fragment() {
 //        }
     }
 
-    private fun renderMessage() {
+    private fun renderMessage(message:String) {
         bind.infoText.text = message
         bind.infoText.visibility = View.VISIBLE
     }
@@ -88,8 +85,8 @@ class Tickets : Fragment() {
             recyclerview.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             recyclerview.adapter = adapter
         }else{
-            bind.infoText.text = message
             bind.infoText.visibility = View.VISIBLE
+            this.renderMessage("No tickets applied")
         }
     }
 

@@ -10,5 +10,7 @@ data class Profile(
     val profile_image: String,
     val state: String,
     val updated_at: String,
-    val user_profile_id: Int
+    val user_profile_id:String,
+    val email_status:String,
+    val phone_status:String
 )

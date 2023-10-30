@@ -3,7 +3,6 @@ package com.example.eventpulse.Activities
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -32,16 +31,16 @@ class Home : AppCompatActivity() {
     var gson = Gson()
     var loading:Boolean = true
     private lateinit var bind:ActivityHomeBinding
-    private lateinit var data:String
+//    private lateinit var data:String
     private lateinit var userData:UserLogin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityHomeBinding.inflate(layoutInflater)
         loading = true
-        data =  getSharedPreferences("user", Context.MODE_PRIVATE).getString("userData",null).toString()
-        if (loading == true && !data.isNullOrEmpty()){
+        var data = getSharedPreferences("user", Context.MODE_PRIVATE).getString("userData",null)
+        if (loading == true && data != null){
             userData =  gson.fromJson(data, UserLogin::class.java)
-            this.renderData()
+            this.renderData(data)
             this.eventListeners()
         }else{
             setContentView(R.layout.activity_login)
@@ -61,7 +60,7 @@ class Home : AppCompatActivity() {
             drawer.openDrawer(GravityCompat.START)
         }
     }
-    private fun renderData(){
+    private fun renderData(data: String) {
         var userData = gson.fromJson(data, UserLogin::class.java)
         Toast.makeText(this, "You are logged in as ${userData.data.email}", Toast.LENGTH_SHORT).show()
         setContentView(R.layout.main_loading)
