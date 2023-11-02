@@ -64,18 +64,21 @@ class NavigationDrawerFragment : Fragment() {
                     R.id.events_nav -> {
                         var trans = fr.beginTransaction()
                         trans.replace(R.id.home_frame, Events())
+                        trans.addToBackStack(null)
                         trans.commit()
                         true
                     }
                     R.id.tickets_nav -> {
                         var trans = fr.beginTransaction()
                         trans.replace(R.id.home_frame,Tickets())
+                        trans.addToBackStack(null)
                         trans.commit()
                         true
                     }
                     R.id.profile_nav -> {
                         var trans = fr.beginTransaction()
                         trans.replace(R.id.home_frame,Profile())
+                        trans.addToBackStack(null)
                         trans.commit()
                         true
                     }

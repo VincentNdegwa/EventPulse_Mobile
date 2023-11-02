@@ -58,8 +58,6 @@ class HomeEvents : Fragment() {
         return bind.root
     }
 
-
-
     private fun renderData(data: String) {
         var userData = gson.fromJson(data, UserLogin::class.java)
         Toast.makeText(requireContext(), "You are logged in as ${userData.data.email}", Toast.LENGTH_SHORT).show()

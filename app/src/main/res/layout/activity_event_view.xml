@@ -28,6 +28,7 @@
                     tools:layout_editor_absoluteY="0dp" />
 
                 <ImageButton
+                    android:id="@+id/navback_button"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@drawable/round_bg_orange"

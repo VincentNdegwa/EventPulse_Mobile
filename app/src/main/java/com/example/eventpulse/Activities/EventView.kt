@@ -23,7 +23,15 @@ class EventView : AppCompatActivity() {
         println(Data)
         setContentView(bind.root)
         this.renderData()
+        this.eventLister()
     }
+
+    private fun eventLister() {
+        bind.navbackButton.setOnClickListener{
+            this.onBackPressed()
+        }
+    }
+
     fun renderData(){
         Glide.with(this).load(Variables().Url+Data.event_image).into(bind.selectedEventImage)
         bind.viewEventDate.text = Data.event_date
