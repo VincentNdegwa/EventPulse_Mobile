@@ -87,4 +87,9 @@ class Login : AppCompatActivity() {
         var createAccIntent = Intent(this, Register::class.java)
         startActivity((createAccIntent))
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.eventpulse.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.example.eventpulse.Activities.Home
+import com.example.eventpulse.Activities.Login
 import com.example.eventpulse.Data.ProfileData.ProfileData
 import com.example.eventpulse.Modules.ActivityRender
 import com.example.eventpulse.Modules.Variables
@@ -95,7 +97,13 @@ class NavigationDrawerFragment : Fragment() {
                     subMenuItem.setOnMenuItemClickListener {
                         when (subMenuItem.itemId) {
                             R.id.logout_nav -> {
-                                println("Logout menu item clicked")
+                                requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
+                                    .edit().remove("credentials")
+                                    .remove("userData")
+                                    .apply()
+
+                                var intent = Intent(requireContext(), Login::class.java)
+                                startActivity(intent)
                                 true
                             }
                             else -> false
