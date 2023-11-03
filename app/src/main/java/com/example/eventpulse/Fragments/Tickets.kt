@@ -2,22 +2,18 @@ package com.example.eventpulse.Fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.eventpulse.Adapter.TicketsAdapter
+import com.example.eventpulse.Adapter.ViewPagerAdapter
 import com.example.eventpulse.Data.login.UserLogin
 import com.example.eventpulse.Data.tickets.TicketsData
 import com.example.eventpulse.Data.tickets.UserTickets
-import com.example.eventpulse.R
 import com.example.eventpulse.Request.DataRequest
 import com.example.eventpulse.databinding.FragmentTicketsBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 
 
@@ -40,6 +36,34 @@ class Tickets : Fragment() {
 
     }
 
+    private fun renderViewPager(data: List<TicketsData>) {
+        var adapter = ViewPagerAdapter(requireActivity(),data)
+        bind.myViewpage.adapter = adapter
+        TabLayoutMediator(bind.myTablayout,bind.myViewpage){
+            tab,position->
+            when(position){
+                0 -> tab.text = "Pending"
+                1 -> tab.text = "Approved"
+                2 -> tab.text = "Attended"
+            }
+        }.attach()
+        bind.myTablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab != null) {
+                    bind.myViewpage.currentItem = tab.position
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+        })
+
+    }
+
     private fun requestData() {
         var params = HashMap<String, String>()
         var userData = requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE).getString("userData", null)
@@ -52,7 +76,8 @@ class Tickets : Fragment() {
                 if (!data.isNullOrEmpty()){
                     var dataRes= Gson().fromJson(data, UserTickets::class.java)
                     if (!dataRes.error){
-                        this.renderData(dataRes.data)
+                        this.renderViewPager(dataRes.data)
+//                        this.renderData(dataRes.data)
                     }else{
                         this.renderMessage(dataRes.message)
                     }
@@ -78,17 +103,6 @@ class Tickets : Fragment() {
         bind.infoText.visibility = View.VISIBLE
     }
 
-    private fun renderData(data: List<TicketsData>) {
-        if (data.size>0){
-            var adapter = TicketsAdapter(data, requireContext())
-            var recyclerview = bind.ticketsRecyclerview
-            recyclerview.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            recyclerview.adapter = adapter
-        }else{
-            bind.infoText.visibility = View.VISIBLE
-            this.renderMessage("No tickets applied")
-        }
-    }
 
     companion object {
 
