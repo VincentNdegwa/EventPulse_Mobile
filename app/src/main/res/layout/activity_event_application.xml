@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue"
+    android:id="@+id/coordinatorLayout"
+    tools:context=".Activities.EventApplication">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/back_arrow"
+        android:backgroundTint="@color/orange"
+        android:layout_margin="10sp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apply for the Event Name"
+                android:textColor="@color/white"
+                android:textSize="21sp"
+                android:layout_marginTop="55sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="All inputs with border are required"
+                android:textColor="@color/orange"
+                android:textStyle="bold"
+                android:layout_marginTop="10sp"
+                android:textSize="15sp"
+             />
+<!---->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10sp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tell us about your main agenda for attending this event"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_input_bg"
+                    android:padding="10sp"
+                    android:minHeight="70sp"
+                    android:layout_marginTop="5sp"
+                    android:textColor="@color/blue"
+                    android:inputType="text"/>
+            </LinearLayout>
+<!--            -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10sp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="What do you expect to gain from this event?"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_input_bg"
+                    android:padding="10sp"
+                    android:minHeight="70sp"
+                    android:layout_marginTop="5sp"
+                    android:textColor="@color/blue"
+                    android:inputType="text"/>
+            </LinearLayout>
+            <!--            -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10sp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Have you attended similar events in the past? If so, which one?"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_input_bg"
+                    android:padding="10sp"
+                    android:minHeight="70sp"
+                    android:layout_marginTop="5sp"
+                    android:textColor="@color/blue"
+                    android:inputType="text"/>
+            </LinearLayout>
+            <!--            -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10sp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Learning Objectives: What specific knowledge or skills do you hope to gain from this event?"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="70sp"
+                    android:background="@drawable/input_bg_none"
+                    android:padding="10sp"
+                    android:layout_marginTop="5sp"
+                    android:textColor="@color/blue"
+                    android:inputType="text"/>
+            </LinearLayout>
+            <!--            -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10sp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Do you have any suggestions or ideas for improving this event?"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/input_bg_none"
+                    android:padding="10sp"
+                    android:layout_marginTop="5sp"
+                    android:textColor="@color/blue"
+                    android:inputType="text"/>
+            </LinearLayout>
+            <!--            -->
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10sp"
+            android:backgroundTint="@color/green"
+            android:text="Apply"
+            android:textSize="20sp"
+            android:textColor="@color/blue"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

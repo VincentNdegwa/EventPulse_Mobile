@@ -110,6 +110,7 @@
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/book_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="BookTicket"
