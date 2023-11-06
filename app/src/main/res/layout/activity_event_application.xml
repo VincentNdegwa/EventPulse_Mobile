@@ -14,6 +14,7 @@
         android:src="@drawable/back_arrow"
         android:backgroundTint="@color/orange"
         android:layout_margin="10sp"
+        android:id="@+id/back_button"
         />
 
     <RelativeLayout
@@ -57,6 +58,7 @@
                     android:textColor="@color/green"
                     android:textSize="15sp"/>
                 <EditText
+                    android:id="@+id/reason"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/normal_input_bg"
@@ -80,6 +82,7 @@
                     android:textColor="@color/green"
                     android:textSize="15sp"/>
                 <EditText
+                    android:id="@+id/expectations"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/normal_input_bg"
@@ -103,6 +106,7 @@
                     android:textColor="@color/green"
                     android:textSize="15sp"/>
                 <EditText
+                    android:id="@+id/similar_event"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/normal_input_bg"
@@ -127,6 +131,7 @@
                     android:textColor="@color/green"
                     android:textSize="15sp"/>
                 <EditText
+                    android:id="@+id/objectives"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="70sp"
@@ -151,6 +156,7 @@
                     android:textColor="@color/green"
                     android:textSize="15sp"/>
                 <EditText
+                    android:id="@+id/suggestions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/input_bg_none"
@@ -164,6 +170,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/application_button"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_margin="10sp"
