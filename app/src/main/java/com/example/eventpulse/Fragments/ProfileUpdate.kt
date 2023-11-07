@@ -1,26 +1,41 @@
 package com.example.eventpulse.Fragments
 
-import android.annotation.SuppressLint
+import android.Manifest
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
-import android.view.Display.Mode
+import android.provider.MediaStore
+import android.util.Base64
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.example.eventpulse.Activities.MainActivity
 import com.example.eventpulse.Data.login.UserLogin
 import com.example.eventpulse.Data.mainResponse.MainResPonse
+import com.example.eventpulse.Dialogs.UpdateDialog
 import com.example.eventpulse.Modules.Variables
 import com.example.eventpulse.R
 import com.example.eventpulse.Request.DataRequest
 import com.example.eventpulse.databinding.FragmentProfileUpdateBinding
 import com.google.gson.Gson
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 class ProfileUpdate : Fragment() {
 
     private lateinit var bind:FragmentProfileUpdateBinding
+    private  var profileImageUrl:String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +68,10 @@ class ProfileUpdate : Fragment() {
             params["phone_number"] = phoneNumber
             params["country"] = country
             params["state"] = state
+            if (profileImageUrl.isNotEmpty()){
+                params["profile_image"] = profileImageUrl
+            }
+
             if (
                 firstName.isNotEmpty() &&
                 lastName.isNotEmpty() &&
@@ -71,6 +90,7 @@ class ProfileUpdate : Fragment() {
                        Toast.makeText(requireContext(), resData.message, Toast.LENGTH_SHORT).show()
                    }else{
                        Toast.makeText(requireContext(), "Profile updated", Toast.LENGTH_SHORT).show()
+                       UpdateDialog().show(parentFragmentManager, "fragmentManager")
                    }
                    this.navigateBack()
                }, onError = {
@@ -84,7 +104,67 @@ class ProfileUpdate : Fragment() {
         bind.buttonCancel.setOnClickListener{
             this.navigateBack()
         }
+        bind.editImage.setOnClickListener{
+            this.checkFilePermission()
+        }
     }
+
+
+
+    private fun checkFilePermission() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_DENIED){
+            this.imagePicker()
+        }else{
+//            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_MEDIA_IMAGES),read_request_code)
+            var permissionReq = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+                isGranted->
+                if (isGranted){
+                    this.imagePicker()
+                }
+            }
+
+            permissionReq.launch(Manifest.permission.READ_MEDIA_IMAGES)
+        }
+    }
+
+    private fun imagePicker() {
+        var intent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        myResultsLauncher.launch(intent)
+
+    }
+
+    var myResultsLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        results->
+        if (results.resultCode == Activity.RESULT_OK){
+            if (results.data != null){
+                bind.updateProfileImage.setImageURI(results.data?.data)
+                var imageFileBase64 = results.data?.data?.let { this.fileEncoder(it) }
+                profileImageUrl = imageFileBase64.toString()
+            }
+        }
+    }
+
+    private fun fileEncoder(data: Uri): String {
+        try {
+            val inputStream = requireActivity().contentResolver.openInputStream(data)
+            if (inputStream != null) {
+                val byteArrayOutputStream = ByteArrayOutputStream()
+                val buffer = ByteArray(1024)
+                var len: Int
+                while (inputStream.read(buffer).also { len = it } != -1) {
+                    byteArrayOutputStream.write(buffer, 0, len)
+                }
+                val imageBytes = byteArrayOutputStream.toByteArray()
+                val imageBase64 = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+                return imageBase64
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return ""
+    }
+
+
 
     private fun navigateBack() {
        requireActivity().onBackPressed()

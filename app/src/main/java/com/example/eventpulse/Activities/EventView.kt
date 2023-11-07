@@ -17,10 +17,12 @@ import com.google.gson.Gson
 class EventView : AppCompatActivity() {
     private lateinit var Data:ViewData
     private lateinit var bind:ActivityEventViewBinding
+    private lateinit var eventData:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityEventViewBinding.inflate(layoutInflater)
         var data = intent.getStringExtra("event")
+        eventData = data.toString()
         Data = Gson().fromJson(data, ViewData::class.java)
         println(Data)
         setContentView(bind.root)
@@ -34,6 +36,7 @@ class EventView : AppCompatActivity() {
         }
         bind.bookButton.setOnClickListener{
             var applicationIntent = Intent(this, EventApplication::class.java)
+            applicationIntent.putExtra("data", eventData)
             startActivity(applicationIntent)
         }
     }

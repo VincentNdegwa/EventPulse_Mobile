@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue"
-    android:id="@+id/coordinatorLayout"
     tools:context=".Activities.EventApplication">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -34,7 +33,7 @@
                 android:text="Apply for the Event Name"
                 android:textColor="@color/white"
                 android:textSize="21sp"
-                android:layout_marginTop="55sp"/>
+                android:layout_marginTop="70sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
