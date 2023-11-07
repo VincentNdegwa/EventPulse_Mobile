@@ -4,13 +4,21 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.eventpulse.Data.login.UserLogin
+import com.example.eventpulse.Data.mainResponse.MainResPonse
 import com.example.eventpulse.Data.viewData.ViewData
+import com.example.eventpulse.Dialogs.ErrorDialog
+import com.example.eventpulse.Dialogs.LoadingDialog
+import com.example.eventpulse.Modules.CustomToast
 import com.example.eventpulse.R
 import com.example.eventpulse.Request.DataRequest
 import com.example.eventpulse.databinding.ActivityEventApplicationBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 
 class EventApplication : AppCompatActivity() {
@@ -47,6 +55,8 @@ class EventApplication : AppCompatActivity() {
     }
 
     private fun startApplication() {
+
+
         var params = HashMap<String, String>()
 
         var event_agenda = findViewById<EditText>(R.id.reason).text.toString()
@@ -70,13 +80,24 @@ class EventApplication : AppCompatActivity() {
             params["user_id"] = id
 
             if (this.validate(params)){
-                Log.d("params", params.toString())
+
+                var loadingDialog = LoadingDialog()
+                loadingDialog.show(supportFragmentManager, "fragmentManager")
                 DataRequest(this).post(params,"api/event/apply",
                     onSuccess = {
                             data->print(data)
+                        loadingDialog.dismiss()
+                        var mainData = Gson().fromJson(data, MainResPonse::class.java)
+                        if (mainData.error){
+                            ErrorDialog(mainData.message).show(supportFragmentManager, "fm")
+                        }else{
+                            CustomToast(this).make(mainData.message, bind.root)
+                        }
                     },
                     onError = {
                         err->print(err)
+                        loadingDialog.dismiss()
+                        ErrorDialog(err).show(supportFragmentManager, "fm")
                     })
             }else{
                 Toast.makeText(this, "Please fill the required fields", Toast.LENGTH_SHORT).show()
@@ -89,6 +110,10 @@ class EventApplication : AppCompatActivity() {
     }
 
     private fun validate(params: HashMap<String, String>): Boolean {
-        return true
+        return (params["event_agenda"]?.isNotEmpty() == true) &&
+                (params["expectation"]?.isNotEmpty() == true) &&
+                (params["similar_event"]?.isNotEmpty() == true)
+
+
     }
 }
