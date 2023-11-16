@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.eventpulse.Adapter.ViewPagerAdapter
 import com.example.eventpulse.Data.login.UserLogin
 import com.example.eventpulse.Data.tickets.TicketsData
@@ -77,7 +78,6 @@ class Tickets : Fragment() {
                     var dataRes= Gson().fromJson(data, UserTickets::class.java)
                     if (!dataRes.error){
                         this.renderViewPager(dataRes.data)
-//                        this.renderData(dataRes.data)
                     }else{
                         this.renderMessage(dataRes.message)
                     }
