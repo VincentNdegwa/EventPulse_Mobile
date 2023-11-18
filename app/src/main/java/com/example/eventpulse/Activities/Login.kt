@@ -4,16 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
 import android.widget.Toast
 import com.example.eventpulse.Data.login.UserLogin
-import com.example.eventpulse.R
 import com.example.eventpulse.Request.DataRequest
 import com.example.eventpulse.databinding.ActivityLoginBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.util.Objects
 
 class Login : AppCompatActivity() {
     private lateinit var bind: ActivityLoginBinding
@@ -84,7 +81,7 @@ class Login : AppCompatActivity() {
 
     }
     private  fun navigateCreateAcc(){
-        var createAccIntent = Intent(this, Register::class.java)
+        var createAccIntent = Intent(this, EmailVerification::class.java)
         startActivity((createAccIntent))
     }
 
