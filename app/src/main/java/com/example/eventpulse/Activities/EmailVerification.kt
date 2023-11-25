@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.eventpulse.Data.mainResponse.MainResPonse
+import com.example.eventpulse.Dialogs.EmailCodeDialog
 import com.example.eventpulse.Dialogs.ErrorDialog
 import com.example.eventpulse.Dialogs.LoadingDialog
 import com.example.eventpulse.R
@@ -47,11 +48,17 @@ class EmailVerification : AppCompatActivity() {
                 println(data)
                 this.hideElement(false)
                 if (!data.isNullOrEmpty()){
+                    var errorDialog:ErrorDialog
+                    var emailCode:EmailCodeDialog
                     var resData = gson.fromJson(data, MainResPonse::class.java)
                     if (resData.error){
-                        Toast.makeText(this, resData.message, Toast.LENGTH_SHORT).show()
+                        errorDialog = ErrorDialog(resData.message)
+                        errorDialog.show(supportFragmentManager, "errorDialog")
+//                        Toast.makeText(this, resData.message, Toast.LENGTH_SHORT).show()
                     }else{
-                        Toast.makeText(this, resData.message, Toast.LENGTH_SHORT).show()
+                        emailCode = EmailCodeDialog(params["email"])
+                        emailCode.show(supportFragmentManager, "emailCodeDialog")
+//                        Toast.makeText(this, resData.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }, onError = {

@@ -40,4 +40,5 @@ class ErrorDialog(message:String) : DialogFragment() {
         super.onStop()
         dialog?.dismiss()
     }
+
 }
