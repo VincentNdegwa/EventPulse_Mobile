@@ -5,7 +5,56 @@
              android:layout_height="match_parent"
              android:background="@color/white"
              tools:context=".Dialogs.EmailCodeDialog">
+    <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp">
 
+        <!-- Message TextView -->
+        <TextView
+                android:id="@+id/tvVerificationMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A verification code has been sent to your email. Please check your email and enter the code below:"
+                android:textSize="18sp"
+                android:textColor="@color/blue"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp"/>
+
+        <!-- Email TextView -->
+        <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: user@example.com"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="@color/blue"
+                android:layout_below="@id/tvVerificationMessage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+
+        <!-- Verification Code EditText -->
+        <EditText
+                android:id="@+id/etVerificationCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter the verification code"
+                android:inputType="text"
+                android:layout_below="@id/tvEmail"
+                android:layout_marginTop="16dp"/>
+
+        <!-- Submit Button -->
+        <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:textColor="@color/white"
+                android:layout_below="@id/etVerificationCode"
+                android:layout_marginTop="16dp"/>
+    </RelativeLayout>
 
 
 </FrameLayout>

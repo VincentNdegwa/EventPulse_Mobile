@@ -1,5 +1,6 @@
 package com.example.eventpulse.Dialogs
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ class EmailCodeDialog(message: String?) : DialogFragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,13 +29,14 @@ class EmailCodeDialog(message: String?) : DialogFragment() {
 //
 //        }
         bind = FragmentEmailCodeDialogBinding.inflate(layoutInflater)
+        bind.tvEmail.text = "Email: $message"
         return  bind.root
     }
 
     override fun onStart() {
         super.onStart()
         dialog?.setCancelable(false)
-        dialog?.window?.setLayout((resources.displayMetrics.widthPixels*0.8).toInt(), ViewGroup.LayoutParams.MATCH_PARENT)
+        dialog?.window?.setLayout((resources.displayMetrics.widthPixels*0.95).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
     override fun onStop() {

@@ -66,6 +66,7 @@ class EmailVerification : AppCompatActivity() {
                 this.hideElement(false)
                 if (!isFinishing && !isDestroyed) {
                     errorDialog = ErrorDialog(error)
+                    println("error in sending data")
                     errorDialog?.show(supportFragmentManager, "errorFragment")
                 }
 
