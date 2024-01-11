@@ -1,11 +1,15 @@
 package com.example.eventpulse.Request
 
 import android.content.Context
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.DefaultRetryPolicy
+import com.android.volley.NoConnectionError
 import com.android.volley.Request
 import com.android.volley.RetryPolicy
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.eventpulse.Dialogs.NetworkErrorDialog
 import com.example.eventpulse.Modules.Variables
 
 class DataRequest(context: Context) {
@@ -38,7 +42,12 @@ class DataRequest(context: Context) {
                 }
                 queue.add(stringreq)
             }catch (error:VerifyError){
-                println("error$error")
+              if (context is AppCompatActivity){
+                  NetworkErrorDialog().show((context as AppCompatActivity).supportFragmentManager, "network")
+              }else{
+                  Toast.makeText(context, "Network Error", Toast.LENGTH_LONG).show()
+              }
+
             }
         }
 
