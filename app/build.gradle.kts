@@ -43,6 +43,9 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation ("com.github.bumptech.glide:glide:4.14.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+
+
 
 //
     implementation("androidx.core:core-ktx:1.9.0")

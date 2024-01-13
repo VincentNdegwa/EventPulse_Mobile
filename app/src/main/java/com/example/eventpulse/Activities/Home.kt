@@ -60,6 +60,9 @@ class Home : AppCompatActivity() {
         trans.commit()
     }
 
+    override fun onBackPressed() {
+        finishAffinity()
+    }
     private fun renderData() {
         var userProfile =   bind.topFragment.findViewById<ImageView>(R.id.user_profile_image)
         if (!userData.data.profile.profile_image.isNullOrEmpty()){
